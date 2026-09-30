@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Fintech Wallet</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container" style="max-width: 720px; margin-top: 3rem;">
+    <!-- Top Nav with Theme Toggle -->
+    <header class="nav-header">
+      <div class="brand-wrapper">
+        <div class="brand-logo">W</div>
+        <div>
+          <h1 style="font-size: 1.25rem; margin: 0;">Fintech <span class="brand-gradient-text">SecureWallet</span></h1>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Enterprise Security Platform</span>
+        </div>
+      </div>
+      <div class="nav-controls">
+        <button class="theme-toggle" aria-label="Toggle Theme" title="Toggle theme"></button>
+      </div>
+    </header>
+
+    <div class="card" style="text-align: center; padding: 3rem 2rem;">
+      <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: var(--radius-pill); font-size: 0.8rem; font-weight: 600; color: var(--accent-cyan); margin-bottom: 1.25rem;">
+        <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-cyan); display: inline-block;"></span>
+        Secure Digital Asset &amp; Wallet Architecture
+      </div>
+
+      <h2 style="font-size: 2.25rem; margin-bottom: 0.75rem; letter-spacing: -0.03em;">
+        Demonstrating Vulnerabilities &amp; <span class="brand-gradient-text">Security Controls</span>
+      </h2>
+
+      <p class="subtitle" style="max-width: 520px; margin: 0 auto 2rem auto; font-size: 1rem; line-height: 1.6;">
+        A full-stack fintech wallet demonstrating Insecure Direct Object References (IDOR), SQL injection, password security, transaction locking, and audit logging.
+      </p>
+
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="login.html" class="btn btn-primary" style="padding: 0.85rem 2rem; font-size: 1rem;">
+          Launch Application &rarr;
+        </a>
+      </div>
+
+      <div class="hero-feature-grid">
+        <div class="feature-card">
+          <strong style="font-size: 0.75rem; color: var(--danger); display: block;">W1 IDOR</strong>
+          <span style="font-size: 0.8rem; color: var(--text-secondary);">Direct URL exposure</span>
+        </div>
+        <div class="feature-card">
+          <strong style="font-size: 0.75rem; color: var(--warning); display: block;">W2 Credentials</strong>
+          <span style="font-size: 0.8rem; color: var(--text-secondary);">Plaintext vs bcrypt</span>
+        </div>
+        <div class="feature-card">
+          <strong style="font-size: 0.75rem; color: var(--primary); display: block;">W3 Injection</strong>
+          <span style="font-size: 0.8rem; color: var(--text-secondary);">Concat vs Params</span>
+        </div>
+        <div class="feature-card">
+          <strong style="font-size: 0.75rem; color: var(--accent-cyan); display: block;">W4 Race Condition</strong>
+          <span style="font-size: 0.8rem; color: var(--text-secondary);">Row-level locking</span>
+        </div>
+        <div class="feature-card">
+          <strong style="font-size: 0.75rem; color: var(--accent-purple); display: block;">W5 Input Validation</strong>
+          <span style="font-size: 0.8rem; color: var(--text-secondary);">Negative/self-transfers</span>
+        </div>
+        <div class="feature-card">
+          <strong style="font-size: 0.75rem; color: var(--success); display: block;">W6 Accountability</strong>
+          <span style="font-size: 0.8rem; color: var(--text-secondary);">Audit trail logging</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    initTheme();
+    // Redirect if already logged in
+    const token = sessionStorage.getItem('token');
+    const walletId = sessionStorage.getItem('walletId');
+    if (token && walletId) {
+      window.location.href = `dashboard.html?walletId=${encodeURIComponent(walletId)}`;
+    }
+  </script>
+</body>
+</html>

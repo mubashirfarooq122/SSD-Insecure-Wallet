@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Secure Fintech Wallet</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Top Nav Bar -->
+    <header class="nav-header">
+      <div class="brand-wrapper">
+        <div class="brand-logo">W</div>
+        <div>
+          <h1 style="font-size: 1.25rem; margin: 0;">Fintech <span class="brand-gradient-text">SecureWallet</span></h1>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">
+            Logged in as: <strong id="user-display" style="color: var(--primary);">Loading...</strong>
+          </span>
+        </div>
+      </div>
+      <div class="nav-controls">
+        <button class="theme-toggle" aria-label="Toggle Theme" title="Toggle theme"></button>
+        <button id="btn-logout" class="btn btn-secondary btn-sm">Sign Out</button>
+      </div>
+    </header>
+
+    <div id="alert-box" class="alert"></div>
+
+
+    <!-- Main Grid: Balance & Transfer Form -->
+    <div class="grid-2col">
+      <!-- Balance Card -->
+      <div class="card balance-card">
+        <div>
+          <div class="balance-header">
+            <div>
+              <span id="wallet-number-pill" style="display: inline-block; background: var(--brand-gradient); color: #fff; padding: 0.2rem 0.6rem; border-radius: var(--radius-pill); font-size: 0.8rem; font-weight: 700; margin-bottom: 0.25rem;">
+                Wallet #...
+              </span>
+              <h3>Active Balance</h3>
+            </div>
+            <span class="tag tag-received">LIVE</span>
+          </div>
+          <div class="balance-amount">
+            <span class="currency">PKR </span><span id="balance-display">0.00</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.2rem;">
+              <span>OPTION 1: SEQUENTIAL ID</span>
+              <span style="color: var(--accent-cyan); font-weight: 600;">Simple Number</span>
+            </div>
+            <div class="id-pill">
+              <span style="font-weight: 700; color: var(--text-primary);" id="wallet-number-display">Wallet #...</span>
+              <button class="btn-copy" id="btn-copy-num" title="Copy Wallet Number">
+                <svg style="width: 14px; height: 14px;" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M7 3.5A1.5 1.5 0 018.5 2h3.879a1.5 1.5 0 011.06.44l3.122 3.12A1.5 1.5 0 0117 6.622V12.5a1.5 1.5 0 01-1.5 1.5h-1v-3.379a3 3 0 00-.879-2.121L10.5 5.379A3 3 0 008.379 4.5H7v-1z" />
+                  <path d="M4.5 6A1.5 1.5 0 003 7.5v9A1.5 1.5 0 004.5 18h7a1.5 1.5 0 001.5-1.5v-5.879a1.5 1.5 0 00-.44-1.06L9.44 6.439A1.5 1.5 0 008.379 6H4.5z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.2rem;">
+              <span>OPTION 2: REST URL UUID</span>
+              <span style="color: var(--primary); font-weight: 600;">Raw GUID</span>
+            </div>
+            <div class="id-pill">
+              <code id="wallet-id-display">-</code>
+              <button class="btn-copy" id="btn-copy-uuid" title="Copy Wallet UUID">
+                <svg style="width: 14px; height: 14px;" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M7 3.5A1.5 1.5 0 018.5 2h3.879a1.5 1.5 0 011.06.44l3.122 3.12A1.5 1.5 0 0117 6.622V12.5a1.5 1.5 0 01-1.5 1.5h-1v-3.379a3 3 0 00-.879-2.121L10.5 5.379A3 3 0 008.379 4.5H7v-1z" />
+                  <path d="M4.5 6A1.5 1.5 0 003 7.5v9A1.5 1.5 0 004.5 18h7a1.5 1.5 0 001.5-1.5v-5.879a1.5 1.5 0 00-.44-1.06L9.44 6.439A1.5 1.5 0 008.379 6H4.5z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transfer Card -->
+      <div class="card">
+        <h3>Transfer Funds</h3>
+        <p class="subtitle" style="font-size: 0.85rem; margin-bottom: 0.75rem;">
+          Send money via numeric Wallet ID (1, 2...) or full UUID.
+        </p>
+
+        <!-- Destination Type Selector -->
+        <div class="auth-switch" style="margin-bottom: 1rem;">
+          <button type="button" class="auth-switch-btn active" id="tab-send-num">1. By Wallet Number</button>
+          <button type="button" class="auth-switch-btn" id="tab-send-uuid">2. By Wallet UUID</button>
+        </div>
+
+        <form id="transfer-form">
+          <div class="form-group">
+            <label for="transfer-receiver" id="label-transfer-receiver">Recipient Wallet Number</label>
+            <input type="text" id="transfer-receiver" required placeholder="e.g. 2">
+            <span id="hint-transfer-receiver" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.25rem;">
+              Enter the simple sequential ID (1, 2, 3...)
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="transfer-amount">Amount (PKR)</label>
+            <input type="number" id="transfer-amount" step="0.01" min="0.01" required placeholder="500.00">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full" id="btn-transfer">
+            Send Transfer
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Transaction History Card -->
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <div>
+          <h3 style="margin: 0;">Transaction Ledger</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Recorded transfers with both Wallet # and UUID</span>
+        </div>
+        <button id="btn-refresh" class="btn btn-secondary btn-sm">
+          <svg style="width: 14px; height: 14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          Refresh
+        </button>
+      </div>
+      <div class="mobile-table-hint">Swipe horizontally to view full ledger &rarr;</div>
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Direction</th>
+              <th>Sender</th>
+              <th>Receiver</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="transactions-table-body">
+            <tr>
+              <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 2rem;">Loading transactions...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    initDashboardPage();
+  </script>
+</body>
+</html>

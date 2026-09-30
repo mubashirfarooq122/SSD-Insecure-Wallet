@@ -1,0 +1,3 @@
+1. & "C:\Program Files\PostgreSQL\16\bin\pg_ctl.exe" -D "C:\Program Files\PostgreSQL\16\data" start
+2. cd "c:\Users\Mubashir\Music\SSD Assignment\secure-wallet\server"
+npm run dev

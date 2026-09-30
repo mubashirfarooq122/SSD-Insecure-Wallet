@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access - Secure Fintech Wallet</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container auth-container">
+    <!-- Top Nav with Brand & Theme Toggle -->
+    <div class="nav-header" style="border-bottom: none; margin-bottom: 1rem;">
+      <div class="brand-wrapper">
+        <div class="brand-logo">W</div>
+        <div>
+          <h2 style="font-size: 1.15rem; margin: 0;">Fintech <span class="brand-gradient-text">SecureWallet</span></h2>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Secure Financial Services</span>
+        </div>
+      </div>
+      <button class="theme-toggle" aria-label="Toggle Theme" title="Toggle theme"></button>
+    </div>
+
+    <div class="card">
+      <!-- Pill Switch between Login and Register -->
+      <div class="auth-switch">
+        <button type="button" class="auth-switch-btn active" id="tab-login">Sign In</button>
+        <button type="button" class="auth-switch-btn" id="tab-register">Register</button>
+      </div>
+
+      <div id="alert-box" class="alert"></div>
+
+      <form id="auth-form">
+        <div class="form-group" id="group-email" style="display: none;">
+          <label for="input-email">Email Address</label>
+          <input type="email" id="input-email" placeholder="e.g. user@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="input-username">Username</label>
+          <input type="text" id="input-username" required placeholder="e.g. Ali">
+        </div>
+
+        <div class="form-group">
+          <label for="input-password">Password</label>
+          <input type="password" id="input-password" required placeholder="Enter your password">
+        </div>
+
+        <div class="form-group" id="group-balance" style="display: none;">
+          <label for="input-balance">Initial Account Balance (PKR)</label>
+          <input type="number" id="input-balance" step="0.01" min="0" value="1000.00" placeholder="1000.00">
+          <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.25rem;">
+            Initial balance credited upon registration.
+          </span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" id="btn-submit" style="margin-top: 0.5rem;">
+          Sign In to Wallet
+        </button>
+      </form>
+    </div>
+
+    <div style="text-align: center; margin-top: 1.5rem;">
+      <a href="index.html" class="btn-link" style="font-size: 0.85rem; color: var(--text-muted);">&larr; Back to Welcome Screen</a>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    initAuthPage();
+  </script>
+</body>
+</html>
