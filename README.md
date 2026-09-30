@@ -1,6 +1,6 @@
-# Secure Fintech Wallet
+# Insecure Fintech Wallet
 
-A secure, full-stack fintech wallet application built with Node.js, Express, PostgreSQL, Vanilla HTML/CSS/JS, JWT authentication, and bcrypt.
+An Insecure, full-stack fintech wallet application built with Node.js, Express, PostgreSQL, Vanilla HTML/CSS/JS, JWT authentication, and bcrypt.
 
 The architecture is structured to systematically demonstrate core application security weaknesses (IDOR, plaintext passwords, SQL injection, concurrency race conditions, lack of input validation, and missing audit logging) and verify their corresponding defense-in-depth mitigations.
 
